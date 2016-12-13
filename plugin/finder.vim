@@ -7,7 +7,7 @@ command! Lines call finder#lines()
 command! Tags call finder#tags()
 command! -nargs=1 Matches call finder#matches(<f-args>)
 
-function s:files(...)
+function! s:files(...)
 	if(a:0 == 0)
 		call finder#files()
 	elseif(a:0 == 1)
