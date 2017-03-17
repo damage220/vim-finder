@@ -233,9 +233,8 @@ endfunction
 function! finder#insertLeave()
 	if(b:cancelled)
 		call finder#exciteUserEvent("FinderCancelled")
+		call finder#leave(b:currentBuffer)
 	endif
-
-	call finder#leave(b:currentBuffer)
 endfunction
 
 function! finder#handle()
@@ -247,10 +246,10 @@ function! finder#handle()
 		return finder#error("Nothing to handle.")
 	endif
 
+	stopinsert
 	let stay = call(b:handler, [item])
 
 	if(!stay)
-		call feedkeys("\<Esc>")
 		call finder#leave(currentBuffer)
 	endif
 endfunction
